@@ -7,7 +7,7 @@ import classesPb.Certificat;
 
 public class CertificatTSP implements Certificat {
 
-	private TSP donnee;
+	private final TSP donnee;
 	public Integer certif[] = null;
 
 	public CertificatTSP(TSP tsp) {
@@ -23,18 +23,16 @@ public class CertificatTSP implements Certificat {
 		this.certif = certif;
 	}
 
-	@Override
 	public void saisie() {
 		Scanner sc = new Scanner(System.in);
 		setCertif(new Integer[certif.length]);
 		for (int i = 0; i < certif.length; i++) {
-			certif[i] = sc.nextInt();
+			certif[i] = new Integer(sc.nextInt());
 		}
 		sc.close();
 		return;
 	}
 
-	@Override
 	public void display() {
 		int i = 0;
 		System.out.print("[");
@@ -42,8 +40,9 @@ public class CertificatTSP implements Certificat {
 			System.out.print(certif[i] + ", ");
 		}
 
-		if (i >= 0)
+		if (i >= 0) {
 			System.out.print(certif[i]);
+		}
 
 		System.out.println("]");
 		return;
@@ -60,49 +59,51 @@ public class CertificatTSP implements Certificat {
 		return arr;
 	}
 
-	@Override
 	public void alea() {
 		setCertif(shuffle(certif));
 	}
 
-	@Override
 	public void reset() {
 		certif = new Integer[donnee.nbVilles];
-		for (int i = 0; i < donnee.nbVilles - 1; i++) {
+		for (int i = 0; i < donnee.nbVilles; i++) {
 			certif[i] = i;
 		}
 		return;
 	}
 
-	@Override
 	public boolean estDernier() {
 		int k;
 		k = -1;
 		for (int i = 0; i < certif.length - 1; i++){
-			if (certif[i] < certif[i + 1]) k = i;
+			if (certif[i] < certif[i + 1]) {
+				k = i;
+			}
 		}
 		return k == -1;
 	}
 
-	@Override
 	public void suivant() {
 		int k, l;
 		k = -1;
 		for (int i = 0; i < certif.length - 1; i++){
-			if (certif[i] < certif[i + 1]) k = i;
+			if (certif[i] < certif[i + 1]) {
+				k = i;
+			}
 		}
 		if (k == -1) return;
 		l = k+1;
 		for (int j = k+1; j < certif.length; j++){
-			if (certif[j] > certif[k]) l = j;
+			if (certif[j] > certif[k]) {
+				l = j;
+			}
 		}
 		Integer tmp = certif[k];
 		certif[k] = certif[l];
 		certif[l] = tmp;
 		for (int i = k+1; i < (certif.length+k+1)/2; i++) {
 			tmp = certif[i];
-			certif[i] = certif[certif.length-1-i+k+1];
-			certif[certif.length-1-i+k+1] = tmp;
+			certif[i] = certif[certif.length-i+k];
+			certif[certif.length-i+k] = tmp;
 		}
 	}
 }

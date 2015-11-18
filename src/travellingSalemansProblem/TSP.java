@@ -1,6 +1,7 @@
 package travellingSalemansProblem;
 
-import classesPb.*;
+import classesPb.Certificat;
+import classesPb.NP;
 
 public class TSP extends NP {
 	public int nbVilles;
@@ -13,10 +14,12 @@ public class TSP extends NP {
 		this.longueurTournee = lg;
 	}
 
+	@Override
 	public CertificatTSP cert() {
 		return new CertificatTSP(this);
 	}
 
+	@Override
 	public boolean estCorrect(Certificat c) {
 		int res = 0;
 		CertificatTSP cert = (CertificatTSP) c;
@@ -25,8 +28,9 @@ public class TSP extends NP {
 			if (res > longueurTournee)
 				return false;
 		}
-		if (cert.certif.length - 1 >= 0)
+		if (cert.certif.length - 1 >= 0) {
 			res += distances[cert.certif[cert.certif.length - 1]][cert.certif[0]];
+		}
 		return res <= longueurTournee;
 	}
 }
