@@ -7,9 +7,11 @@ Certificat : Un tableau de taille n contenant toutes les villes (pas de doublon 
 Dans l'implémentation les villes correspondront à leurs positions dans le tableau en entrée.
 
 Le certifcat est effectivement bornée par la taille de l'entrée : 
-ça taille est n, et celle de l'entrée est n².
+sa taille est n, et celle de l'entrée est n².
 
 Algorithme de vérification : 
+entrée: D le certificat
+sortie: true si le problème TSP est vérifié par D, false sinon
 	Pour i allant de 0 à n-2
 		on ajoute D[i,i+1] au résultat
 	On ajoute D[n-1, 0] au résultat
@@ -19,8 +21,8 @@ L'algorithme est en O(n), par conséquent il est polynomial par rapport à l'ent
 
 2)1)
 Algorithme de génération aléatoire de certificat :
-	Créer un tableau ordonné de taille n (contenant des valeurs allant de 0 à n-1)
-	Mélanger de manière aléatoire les cases du tableau
+	Créer un tableau ordonné de taille n (contenant des valeurs allant de 0 à n-1 correspondant aux indices des villes dans le certificat)
+	Algo: Parcourir le tableau et faire pour chaque élément l'échanger avec un autre élément du tableau choisi aléatoirement. 
 
 Cet algorithme permettra de produire tout les certificats possible en respectant les contraintes décidés au départ. De plus cet algorithme devrait permettre d'avoir une génération uniforme des résultats.
 
@@ -36,7 +38,7 @@ Cet algorithme générera donc des faux négatifs.
 Pour un n fixé, notre certificat peut prendre n! valeur
 
 3)2)
-Pour notre certificat nous prendrons l'ordonné de manière croissante.
+Pour notre certificat nous prendrons l'ordonné de manière croissante (ordre lexicographique).
 Par conséquent le dernier certificat possible sera un tableau décroissant strictement.
 
 3)3)
@@ -66,13 +68,13 @@ Cette transformation résout bien HamiltonCycle, en effet, TSP retourne vrai si 
 Quand on retourne vrai on a réussi à parcourir tout les points et retourner au point de départ. On a donc effectuer un HamiltonCylcle.
 
 4)3) 
-Sachant que HamiltonCycle est connues pour être NP-complet.
+Sachant que HamiltonCycle est connue pour être NP-complet.
 Si on arrive à le réduire dans un autre problème cela veut dire que cet autre problème est au moins aussi difficile que lui.
 Par conséquent TSP est NP-dur.
 De plus TSP est NP, il est donc NP-complet.
 
 4)4)
-Sachant que TSP et HamiltonCycle sont tout deux NP-complet on peut dire que TSP se réduit polynomialement dans HamiltonCycle, car la propriété des problèmes NP-dur c'est qu'on peut réduire tout problème NP en eux. Or être NP-complet c'est être à la fois NP-dur et NP-complet.
+Sachant que TSP et HamiltonCycle sont tout deux NP-complet on peut dire que TSP se réduit polynomialement dans HamiltonCycle, car la propriété des problèmes NP-dur c'est qu'on peut réduire tout problème NP en eux. Or être NP-complet c'est être à la fois NP-dur et NP.
 
 5)1)
 HamiltonPath <=p HamiltonCycle
@@ -100,11 +102,11 @@ TSPOpt1 cherche à trouver la plus petite valeur de ce l possible, il faudra pot
 Si TSPOpt1 est P, sachant que TSPOpt1 est au moins aussi difficile TSP on peut donc dire que TSP est P.
 
 De même pour TSPOpt2 qui retourne l'un des chemins qui permet d'obtenir la plus petite valeur de l possible.
-Or pour trouver ce chemin il faut forcément avoir trouvé cette valeurs possible. Par conséquent TSPOp2 est au moins aussi difficile que TSPOpt2 qui lui même était au moins aussi difficile que TSP. 
+Or pour trouver ce chemin il faut forcément avoir trouvé cette valeurs possible. Par conséquent TSPOp2 est au moins aussi difficile que TSPOpt1 qui lui même était au moins aussi difficile que TSP. 
 On a par conséquent la même conclusion. Si TSPOpt2 était P, alors TSP serait lui aussi P.
 
 8)
-Si TSP était P, cela signifierai que son algorithme se ferait dans un temps polynomial par rapport à la tailel de son entrée (qui est en n²).
+Si TSP était P, cela signifierai que son algorithme se ferait dans un temps polynomial par rapport à la taille de son entrée (qui est en n²).
 
 Pour résoudre TSPOpt1 il suffit de faire plusieurs appels TSP en faisant varié la valeur de l manière croissante.
 Pour être plus précis, on peut calculer le chemin maximum en additionnant toutes les distances de l'entrée.
