@@ -115,3 +115,7 @@ En utilisant ce maximum on peut faire une recherche dichotomique du minimum : on
 On s'arrête quand minimum >= maximum
 
 Ainsi on limite le nombre d'appel à TSP, on reste polynomiale par rapport à la taille de l'entrée, le calcul du maximum initial se fait en O(n²). On peut donc dire que si TSP est P, TSPOpt1 est P.
+
+9)
+On a vu à la question précédent que si on a TSP qui est P on a alors TSPOpt1 qui est P, on peut donc trouver la distance optimale en un temps polynomial.
+Pour que TSPOpt2 soit P, vu qu'on peut trouver la distance optimale en temps polynomial il ne nous reste plus qu'a trouver le chemin dans un temps polynomial pour montrer que TSPOpt2 est polynomial.
