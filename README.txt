@@ -107,3 +107,11 @@ On a par conséquent la même conclusion. Si TSPOpt2 était P, alors TSP serait 
 Si TSP était P, cela signifierai que son algorithme se ferait dans un temps polynomial par rapport à la tailel de son entrée (qui est en n²).
 
 Pour résoudre TSPOpt1 il suffit de faire plusieurs appels TSP en faisant varié la valeur de l manière croissante.
+Pour être plus précis, on peut calculer le chemin maximum en additionnant toutes les distances de l'entrée.
+En utilisant ce maximum on peut faire une recherche dichotomique du minimum : on fait un TSP à la moitié de la distance maximum
+-Si TSP retourne vrai alors on fait que la moitié de la distance -1 devient le maximum
+-Si TSP retourne faux alors on fait que le minimum est la moitié de la distance +1
+
+On s'arrête quand minimum >= maximum
+
+Ainsi on limite le nombre d'appel à TSP, on reste polynomiale par rapport à la taille de l'entrée, le calcul du maximum initial se fait en O(n²). On peut donc dire que si TSP est P, TSPOpt1 est P.
